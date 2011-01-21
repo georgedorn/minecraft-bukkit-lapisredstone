@@ -30,6 +30,7 @@ public class LapisRedstone extends JavaPlugin
 	{
 		super(pluginLoader, instance, desc, folder, plugin, cLoader);
 		config = new Configuration(new File("plugins/lapisredstone.yml"));
+		config.load();
 		MIN = config.getInt("min", 2);
 		MAX = config.getInt("max", 4);
 	}
