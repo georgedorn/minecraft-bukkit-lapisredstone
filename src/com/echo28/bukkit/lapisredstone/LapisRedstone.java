@@ -1,6 +1,7 @@
 package com.echo28.bukkit.lapisredstone;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.logging.Logger;
 
 import org.bukkit.Server;
@@ -10,7 +11,6 @@ import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginLoader;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.util.config.Configuration;
 
 
 /**
@@ -24,15 +24,25 @@ public class LapisRedstone extends JavaPlugin
 	private final Logger log = Logger.getLogger("Minecraft");
 	private int MIN;
 	private int MAX;
-	private Configuration config;
 
 	public LapisRedstone(PluginLoader pluginLoader, Server instance, PluginDescriptionFile desc, File folder, File plugin, ClassLoader cLoader)
 	{
 		super(pluginLoader, instance, desc, folder, plugin, cLoader);
-		config = new Configuration(new File("plugins/lapisredstone.yml"));
-		config.load();
-		MIN = config.getInt("min", 2);
-		MAX = config.getInt("max", 4);
+		folder.mkdirs();
+
+		File yml = new File(getDataFolder(), "config.yml");
+		if (!yml.exists())
+		{
+			try
+			{
+				yml.createNewFile();
+			}
+			catch (IOException ex)
+			{
+			}
+		}
+		MIN = getConfiguration().getInt("min", 2);
+		MAX = getConfiguration().getInt("max", 4);
 	}
 
 	public void onDisable()
