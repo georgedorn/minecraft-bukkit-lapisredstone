@@ -26,7 +26,7 @@ public class LapisRedstoneBlockListener extends BlockListener
 			{
 				Location locy = new Location(event.getBlock().getWorld(), event.getBlock().getX(), event.getBlock().getY(), event.getBlock().getZ(), 0, 0);
 				// Material.INK_SACK
-				event.getBlock().getWorld().dropItem(locy, new ItemStack(Material.INK_SACK, plugin.random(), (byte) 4));
+				event.getBlock().getWorld().dropItemNaturally(locy, new ItemStack(Material.INK_SACK, plugin.random(), (byte) 4));
 			}
 		}
 	}
