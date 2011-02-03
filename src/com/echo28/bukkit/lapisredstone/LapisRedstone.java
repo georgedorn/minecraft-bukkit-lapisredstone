@@ -25,6 +25,9 @@ public class LapisRedstone extends JavaPlugin
 	private int MIN;
 	private int MAX;
 	private int CHANCE;
+	private int EXTRA_LAPIS_MIN;
+	private int EXTRA_LAPIS_MAX;
+	private int EXTRA_LAPIS_CHANCE;
 
 	public LapisRedstone(PluginLoader pluginLoader, Server instance, PluginDescriptionFile desc, File folder, File plugin, ClassLoader cLoader)
 	{
@@ -45,6 +48,9 @@ public class LapisRedstone extends JavaPlugin
 		CHANCE = getConfiguration().getInt("chance", 100); //chance of dropping anything
 		MIN = getConfiguration().getInt("min", 2);
 		MAX = getConfiguration().getInt("max", 4);
+		EXTRA_LAPIS_MIN = getConfiguration().getInt("extra_lapis_min", 3);
+		EXTRA_LAPIS_MAX = getConfiguration().getInt("extra_lapis_max", 7);
+		EXTRA_LAPIS_CHANCE = getConfiguration().getInt("extra_lapis_chance", 100);
 	}
 
 	public void onDisable()
@@ -62,14 +68,26 @@ public class LapisRedstone extends JavaPlugin
 	public int random()
 	{
 		if (CHANCE < 100){
-			int random = (int)(Math.random()*100);
-			if (random > CHANCE){
+			int roll = (int)(Math.random()*100);
+			if (roll > CHANCE){
 				return 0; //failed the roll, don't generate any.
 			}
 		}
 		
 		
 		return MIN + (int) (Math.random() * ((MAX - MIN) + 1));
+	}
+	
+	public int random_lapis(){
+		if(EXTRA_LAPIS_CHANCE < 100){
+			int roll = (int)(Math.random()*100);
+			if (roll > EXTRA_LAPIS_CHANCE){
+				return 0;
+			}
+		}
+		
+		return EXTRA_LAPIS_MIN + (int) (Math.random()* ((EXTRA_LAPIS_MAX - EXTRA_LAPIS_MIN + 1)));
+		
 	}
 
 }

@@ -1,3 +1,6 @@
 min: 2
 max: 4
 chance: 100
+extra_lapis_min: 3
+extra_lapis_max: 7
+extra_lapis_chance: 100
