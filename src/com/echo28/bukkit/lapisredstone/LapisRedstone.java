@@ -24,6 +24,7 @@ public class LapisRedstone extends JavaPlugin
 	private final Logger log = Logger.getLogger("Minecraft");
 	private int MIN;
 	private int MAX;
+	private int CHANCE;
 
 	public LapisRedstone(PluginLoader pluginLoader, Server instance, PluginDescriptionFile desc, File folder, File plugin, ClassLoader cLoader)
 	{
@@ -41,6 +42,7 @@ public class LapisRedstone extends JavaPlugin
 			{
 			}
 		}
+		CHANCE = getConfiguration().getInt("chance", 100); //chance of dropping anything
 		MIN = getConfiguration().getInt("min", 2);
 		MAX = getConfiguration().getInt("max", 4);
 	}
@@ -59,6 +61,14 @@ public class LapisRedstone extends JavaPlugin
 
 	public int random()
 	{
+		if (CHANCE < 100){
+			int random = (int)(Math.random()*100);
+			if (random > CHANCE){
+				return 0; //failed the roll, don't generate any.
+			}
+		}
+		
+		
 		return MIN + (int) (Math.random() * ((MAX - MIN) + 1));
 	}
 
