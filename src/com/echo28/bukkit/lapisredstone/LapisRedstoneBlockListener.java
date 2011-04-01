@@ -20,8 +20,6 @@ public class LapisRedstoneBlockListener extends BlockListener
 	public void onBlockDamage(BlockDamageEvent event)
 	{
 		if (event.isCancelled()) { return; }
-		if (event.getDamageLevel() == org.bukkit.block.BlockDamageLevel.BROKEN)
-		{
 			Material block_type = event.getBlock().getType();
 			
 			if ((block_type == Material.REDSTONE_ORE) || (block_type == Material.GLOWING_REDSTONE_ORE))
@@ -48,8 +46,6 @@ public class LapisRedstoneBlockListener extends BlockListener
 				{
 					event.getBlock().getWorld().dropItemNaturally(locy, new ItemStack(Material.INK_SACK, 1, (byte) 4));
 				}
-				
-			}
 			
 		}
 	}

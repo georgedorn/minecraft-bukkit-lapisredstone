@@ -54,7 +54,7 @@ public class LapisRedstone extends JavaPlugin
 		EXTRA_LAPIS_CHANCE = getConfiguration().getInt("extra_lapis_chance", 100);
 
 		PluginManager pm = getServer().getPluginManager();
-		pm.registerEvent(Event.Type.BLOCK_DAMAGED, blockListener, Priority.Monitor, this);
+		pm.registerEvent(Event.Type.BLOCK_BREAK, blockListener, Priority.Monitor, this);
 
 		log.info(getDescription().getName() + " " + getDescription().getVersion() + " loaded.");
 	}
